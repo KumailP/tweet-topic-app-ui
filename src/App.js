@@ -1,13 +1,58 @@
 import React, { useState } from "react";
 import "./App.css";
+import axios from "axios";
 
 function App() {
   const [tweet, setTweet] = useState("");
   const [loading, setLoading] = useState(false);
+  const [pred, setPred] = useState({
+    svm: "",
+    naive_bayes: "",
+    linear_model: ""
+  });
+  const [fetched, setFetched] = useState(false);
 
   const predict = () => {
-    setLoading(!loading);
-    console.log("Hitting API with: ", tweet);
+    setLoading(true);
+    setFetched(false);
+    axios
+      .post("http://192.168.1.104:8080/api", {
+        tweet
+      })
+      .then(response => {
+        setPredictions(JSON.parse(response.data));
+      })
+      .catch(error => {
+        console.log(error);
+        setFetched(false);
+        setLoading(false);
+      });
+  };
+
+  const categories = {
+    EN: "Entertainment",
+    ST: "Science & Technology",
+    BN: "Business",
+    PT: "Politics",
+    HT: "Health",
+    ED: "Education",
+    SP: "Sports",
+    SI: "Social Issues",
+    RI: "Religion",
+    GM: "General Admin & Management",
+    NW: "News",
+    WB: "Well Being"
+  };
+
+  const setPredictions = pred => {
+    const predictions = {
+      SVM: categories[pred.svm],
+      NB: categories[pred.naive_bayes],
+      LR: categories[pred.linear_model]
+    };
+    setPred(predictions);
+    setLoading(false);
+    setFetched(true);
   };
 
   return (
@@ -32,8 +77,8 @@ function App() {
             </div>
           </div>
           {loading ? (
-            <div class="loader" />
-          ) : (
+            <div className="loader" />
+          ) : fetched ? (
             <>
               <h2>Predictions</h2>
               <div className="tweet-results">
@@ -42,7 +87,7 @@ function App() {
                     <h2>Support Vector Classifier</h2>
                   </span>
                   <span>
-                    <p>Science and Technology</p>
+                    <p>{pred.SVM}</p>
                   </span>
                 </div>
                 <div className="result-box model-LG">
@@ -50,7 +95,7 @@ function App() {
                     <h2>Logistic Regression</h2>
                   </span>
                   <span>
-                    <p>Science and Technology</p>
+                    <p>{pred.LR}</p>
                   </span>
                 </div>
                 <div className="result-box model-NB">
@@ -58,12 +103,12 @@ function App() {
                     <h2>Naive Bayes Classifier</h2>
                   </span>
                   <span>
-                    <p>Science and Technology</p>
+                    <p>{pred.NB}</p>
                   </span>
                 </div>
               </div>
             </>
-          )}
+          ) : null}
         </div>
       </header>
     </div>
