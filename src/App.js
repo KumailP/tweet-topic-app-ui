@@ -16,7 +16,7 @@ function App() {
     setLoading(true);
     setFetched(false);
     axios
-      .post("http://ec2-54-209-150-58.compute-1.amazonaws.com:3000/api", {
+      .post("http://ec2-54-209-150-58.compute-1.amazonaws.com:4000/api", {
         tweet
       })
       .then(response => {
