@@ -16,7 +16,7 @@ function App() {
     setLoading(true);
     setFetched(false);
     axios
-      .post("http://192.168.1.104:8080/api", {
+      .post("http://ec2-54-209-150-58.compute-1.amazonaws.com:8080/api", {
         tweet
       })
       .then(response => {
