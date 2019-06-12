@@ -1,10 +1,13 @@
 {
     apps : [
-      {
-        name      : "tweet-topic-app-ui",
-        script    : "npx",
-        interpreter: "none",
-        args: "serve -p 8443 -T"
-      }
-    ]
+        {
+          name          : 'tweet-topic-app-ui',
+          script        : 'npx',
+          interpreter   : 'none',
+          args          : 'serve build -s',
+          env_production : {
+            NODE_ENV: 'production'
+          }
+        }
+      ]
   }
