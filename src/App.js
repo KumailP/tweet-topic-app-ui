@@ -6,9 +6,10 @@ function App() {
   const [tweet, setTweet] = useState("");
   const [loading, setLoading] = useState(false);
   const [pred, setPred] = useState({
-    svm: "",
-    naive_bayes: "",
-    linear_model: ""
+    SVM: "",
+    NB: "",
+    LR: "",
+    MV: ""
   });
   const [fetched, setFetched] = useState(false);
 
@@ -48,7 +49,8 @@ function App() {
     const predictions = {
       SVM: categories[pred.svm],
       NB: categories[pred.naive_bayes],
-      LR: categories[pred.linear_model]
+      LR: categories[pred.linear_model],
+      MV: categories[pred.majorityVotingResult]
     };
     setPred(predictions);
     setLoading(false);
@@ -104,6 +106,15 @@ function App() {
                   </span>
                   <span>
                     <p>{pred.NB}</p>
+                  </span>
+                </div>
+                
+                <div className="result-box model-NB">
+                  <span>
+                    <h2>Majority Voting Classifier</h2>
+                  </span>
+                  <span>
+                    <p>{pred.MV}</p>
                   </span>
                 </div>
               </div>
