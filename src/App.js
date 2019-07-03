@@ -9,11 +9,14 @@ function App() {
     SVM: "",
     NB: "",
     LR: "",
+    RF: "",
     MV: ""
   });
   const [fetched, setFetched] = useState(false);
 
   const predict = () => {
+    if (!tweet || tweet.length < 3) return;
+
     setLoading(true);
     setFetched(false);
     axios
@@ -50,7 +53,8 @@ function App() {
       SVM: categories[pred.svm],
       NB: categories[pred.naive_bayes],
       LR: categories[pred.linear_model],
-      MV: categories[pred.majorityVotingResult]
+      MV: categories[pred.majorityVotingResult],
+      RF: categories[pred.randomForest]
     };
     setPred(predictions);
     setLoading(false);
@@ -108,15 +112,23 @@ function App() {
                     <p>{pred.NB}</p>
                   </span>
                 </div>
-                
+
                 <div className="result-box model-NB">
                   <span>
-                    <h2>Majority Voting Classifier</h2>
+                    <h2>Random Forest</h2>
                   </span>
                   <span>
-                    <p>{pred.MV}</p>
+                    <p>{pred.RF}</p>
                   </span>
                 </div>
+              </div>
+              <div className="result-box model-NB">
+                <span>
+                  <h2>Majority Voting Classifier</h2>
+                </span>
+                <span>
+                  <p>{pred.MV}</p>
+                </span>
               </div>
             </>
           ) : null}

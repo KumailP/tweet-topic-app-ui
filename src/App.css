@@ -68,7 +68,7 @@
 }
 
 .tweet {
-  max-width: 750px;
+  max-width: 900px;
 }
 
 .tweet-main {
@@ -87,20 +87,22 @@
   border: 2px solid #282c34;
   justify-content: space-between;
   flex: 1;
+  height: 180px;
 }
 
 .result-box span {
-  padding: 20px;
+  padding: 8px;
   margin: 0;
   flex: 1;
 }
 
 .result-box h2 {
-  font-size: 24px;
+  font-size: 18px;
 }
 
 .result-box p {
   flex: 1;
+  font-size: 16px;
 }
 
 .model-SVM span:first-child {
