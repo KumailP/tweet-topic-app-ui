@@ -20,7 +20,7 @@ function App() {
     setLoading(true);
     setFetched(false);
     axios
-      .post("http://ec2-54-209-150-58.compute-1.amazonaws.com:4000/api", {
+      .post("http://ec2-3-93-7-139.compute-1.amazonaws.com:4000/api", {
         tweet
       })
       .then(response => {
